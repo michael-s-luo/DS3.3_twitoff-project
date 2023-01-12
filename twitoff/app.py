@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from .models import DB, User, Tweet
+from .twitter import add_or_update_user
 
 
 def create_app():
@@ -26,21 +27,27 @@ def create_app():
         # Recreate tables according to schema in models.py
         DB.create_all()
 
-        return "Database reset & recreated"
+        return render_template("base.html", title="Reset Database")
 
     @app.route("/populate")
     def populate():
-        # Test user
-        michael = User(id=1, username="Michael")
-        DB.session.add(michael)
+        # test two users
+        add_or_update_user("nasa")
+        add_or_update_user("austen")
 
-        # Test tweet
-        tweet1 = Tweet(id=1, text="Michael's tweet text", user=michael)
-        DB.session.add(tweet1)
+        users = User.query.all()
+        return render_template(
+            "base.html", title="Populate Database", users=users
+        )
 
-        # Save and commit changes
-        DB.session.commit()
+    @app.route("/update")
+    def update():
+        users = User.query.all()
 
-        return "Database populated."
+        # Get most recent tweets from each user
+        for user in users:
+            add_or_update_user(user.username)
+
+        return render_template("base.html", title="Users Updated", users=users)
 
     return app
