@@ -37,7 +37,7 @@ def add_or_update_user(username):
         # If querying User table does not return None, then this user exists already
         # Checks if user exists in local db already, otherwise create new
         db_user = User.query.get(twitter_user.id) or User(
-            id=twitter_user.id, username=twitter_user.screen_name
+            id=twitter_user.id, username=(twitter_user.screen_name).lower()
         )
 
         # Add user to db. No effect if they already exist
