@@ -1,3 +1,8 @@
+"""
+Handles training of logistic regression model to predict likely
+user of a given tweet.
+"""
+
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 from .models import User
@@ -5,6 +10,20 @@ from .twitter import vectorize_tweet
 
 
 def predict_user(user0_username, user1_username, tweet_text):
+    """Given two twitter users, predicts user more likely to tweet a given
+    hypothetical string of text using a logistic regression model. Input tweets are
+    vectorized using SpaCy. Data is obtained from Users & Tweets table from
+    local database.
+
+    Parameters
+    ----------
+    username_0 : str
+        Twitter username
+    username_1 : str
+        Twitter username
+    tweet_text : str
+        Hypothetical tweet text
+    """
 
     # Get user info from database
     user0 = User.query.filter(User.username == user0_username).one()

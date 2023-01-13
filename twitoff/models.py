@@ -1,3 +1,8 @@
+""" 
+Set up sqlalchemy classes for User and Tweet tables
+& database integration
+"""
+
 from flask_sqlalchemy import SQLAlchemy
 
 DB = SQLAlchemy()

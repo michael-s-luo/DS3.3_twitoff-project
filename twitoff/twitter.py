@@ -1,3 +1,8 @@
+""" 
+Functions to query Twitter API for user & tweet information, 
+vectorize tweets, and update them to local database instance.
+"""
+
 from os import getenv
 import tweepy
 from .models import DB, Tweet, User

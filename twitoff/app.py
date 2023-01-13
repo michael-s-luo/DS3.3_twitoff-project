@@ -1,3 +1,9 @@
+"""
+App 'factory' for a flask instance.
+Handles all the routing and browser requests for the Twitoff app using
+Flask.
+"""
+
 from flask import Flask, render_template, request
 from .models import DB, User, Tweet
 from .twitter import add_or_update_user
