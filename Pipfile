@@ -12,6 +12,7 @@ tweepy = "*"
 spacy = "*"
 scikit-learn = "*"
 numpy = "*"
+gunicorn = "*"
 
 [dev-packages]
 
