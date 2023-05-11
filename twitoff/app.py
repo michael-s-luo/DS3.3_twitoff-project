@@ -11,7 +11,6 @@ from .predict import predict_user
 
 
 def create_app():
-
     app = Flask(__name__)
 
     # DB configurations, connect database & app
@@ -34,7 +33,7 @@ def create_app():
         # Recreate tables according to schema in models.py
         DB.create_all()
 
-        return render_template("base.html", title="Reset Database")
+        return render_template("base.html", title="Database Reset!")
 
     # @app.route("/populate")
     # def populate():
@@ -100,7 +99,7 @@ def create_app():
         tweet_text = request.values["tweet_text"]
 
         if user0 == user1:
-            message = "Please select two different users."
+            message = "Cannot compare a user to themselves. Please select two different users."
         else:
             prediction = predict_user(user0, user1, tweet_text)
             message = (
